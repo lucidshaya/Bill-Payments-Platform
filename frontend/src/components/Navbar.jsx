@@ -8,8 +8,10 @@ const Navbar = () => {
   };
 
   return (
+   
+
     <nav className="bg-black py-4 px-6 shadow-md relative">
-      <div className="max-w-7xl mx-auto flex justify-between items-center">
+      <div className="max-w-7xl mx-auto flex justify-between items-center ">
         {/* Logo / Brand Section */}
         <a
           href="/docs/installation"
@@ -45,7 +47,7 @@ const Navbar = () => {
             <li>
               <a
                 className="text-white hover:text-sky-500 dark:hover:text-sky-400 transition-colors duration-200"
-                href="/blog"
+                href="/"
               >
                 Home
               </a>
@@ -62,7 +64,7 @@ const Navbar = () => {
               <a
                 className="text-white hover:text-sky-500 dark:hover:text-sky-400 transition-colors duration-200"
                 href="/blog"
-              >
+                >
                 Refer and Earn
               </a>
             </li>
@@ -88,7 +90,7 @@ const Navbar = () => {
           <a
             href="/signup"
             className="bg-white text-black font-semibold h-12 px-6 rounded-lg flex items-center justify-center hover:bg-gray-200 transition-colors duration-200"
-          >
+            >
             Sign Up
           </a>
         </div>
@@ -120,7 +122,7 @@ const Navbar = () => {
                   className="text-white hover:text-sky-500 transition-colors duration-200 block"
                   href="/blog"
                   onClick={toggleMobileMenu}
-                >
+                  >
                   Refer and Earn
                 </a>
               </li>
@@ -156,6 +158,8 @@ const Navbar = () => {
         )}
       </div>
     </nav>
+                  
+                
   );
 };
 
