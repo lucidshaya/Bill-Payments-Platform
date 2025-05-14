@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+* {
+    color: white;
+    background-color: black;
+    font-family: "Manrope", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+}
+@layer base {
+    h1 {
+        @apply: font-weight: 600;
+    }
+}
+
