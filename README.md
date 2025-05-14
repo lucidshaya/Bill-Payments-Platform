@@ -1,3 +1,7 @@
+
+![Bill Payment WebApp Design Pattern](https://lucid.app/lucidspark/7652faf1-15d3-4757-a420-f855752a048c/edit?invitationId=inv_c4f9e181-3377-4af3-95a1-fbe9efa6d4ed&page=0_0#)
+
+
 # Bill Payments Platform
 
 A full-stack bill payments platform built with the PERN stack (PostgreSQL, Express, React, Node.js). This application enables users to pay bills such as airtime, data subscriptions, electricity, and betting securely and efficiently, with a user-friendly interface and integrated customer support.
