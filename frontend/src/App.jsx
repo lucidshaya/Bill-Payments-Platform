@@ -7,11 +7,13 @@ import PaymentSuccess from './pages/PaymentSucess';
 import PaymentFailed from './pages/PaymentFailed';
 import Navbar from './components/Navbar';
 import Comingsoon from './pages/comingsoon';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <Router>
       <Navbar />
+      <hr />
       <Routes>
         {/* <Route path="/" element={<LoginPage />} /> */}
         <Route path="/" element={<HomePage />} />
@@ -22,6 +24,8 @@ function App() {
         <Route path="/payment-failed" element={<PaymentFailed />} />
         <Route path="/comingsoon" element={<Comingsoon />} />
       </Routes>
+      <hr />
+      <Footer />
     </Router>
   );
 }

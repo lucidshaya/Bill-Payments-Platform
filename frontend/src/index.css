@@ -17,3 +17,15 @@
     }
 }
 
+
+.phonepng {
+
+    position: absolute;
+    width: 487px;
+height: 429px;
+left: 487px;
+top: 594px;
+
+background: url(fd84aeae-50bd-412b-8f60-0b61df874ec9_removalai_preview.png);
+transform: matrix(-1, 0, 0, 1, 0, 0);
+}
