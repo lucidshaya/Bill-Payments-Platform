@@ -1,4 +1,5 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useState } from 'react';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
@@ -10,16 +11,25 @@ import Comingsoon from './pages/comingsoon';
 import Footer from './components/Footer';
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => setIsLoggedIn(true);
+  const handleLogout = () => setIsLoggedIn(false);
+
   return (
     <Router>
-      <Navbar />
+      <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <hr />
       <Routes>
-        {/* <Route path="/" element={<LoginPage />} /> */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/signup" element={<SignupPage />} />
-        <Route path="/login"element={<LoginPage />} />
-        <Route path="/input" element={<InputPage />} />
+        <Route path="/signup" element={<SignupPage onSignup={handleLogin} />} />
+        <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route
+          path="/input"
+          element={
+            isLoggedIn ? <InputPage /> : <Navigate to="/login" replace />
+          }
+        />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failed" element={<PaymentFailed />} />
         <Route path="/comingsoon" element={<Comingsoon />} />
