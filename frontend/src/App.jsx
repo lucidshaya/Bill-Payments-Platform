@@ -9,6 +9,8 @@ import PaymentFailed from './pages/PaymentFailed';
 import Navbar from './components/Navbar';
 import Comingsoon from './pages/comingsoon';
 import Footer from './components/Footer';
+import axios from 'axios';
+const api = axios.create({ baseURL: 'https://bill-payment-backend.onrender.com' });
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
