@@ -1,19 +1,21 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-// import { signup } from '../services/api';
+import axios from 'axios';
 
 const SignupPage = () => {
-  const [name, setName] = useState('');
+  const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      // const response = await signup({ name, email, password });
-      // localStorage.setItem('token', response.data.token);
-      navigate('/home');
+      const response = await axios.post('http://localhost:5000/api/auth/signup', {
+        username,
+        email,
+        password,
+      });
+      localStorage.setItem('token', response.data.token);
+      window.location.href = '/home';
     } catch (error) {
       console.error('Signup failed:', error);
     }
@@ -31,8 +33,8 @@ const SignupPage = () => {
             <input
               type="text"
               id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
               placeholder="Enter your name"
               required
               className="w-full px-4 py-2 bg-gray-800 text-white rounded-lg border border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
