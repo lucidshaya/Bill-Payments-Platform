@@ -1,20 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaPhone, FaInternetExplorer, FaBolt, FaDice, FaSignal } from 'react-icons/fa';
+import { FaPhone, FaInternetExplorer, FaBolt, FaDice, FaSignal, FaRobot } from 'react-icons/fa';
+import Modal from 'react-modal';
+import phoneImage from '../assets/phone.png'; // Adjust path as needed
 
-// Assuming this asset is available in your project
-import phoneImage from '../assets/phone.png'; // Replace with actual path
+Modal.setAppElement('#root'); // For accessibility
 
-const HomePage = () => {
+const HomePage = ({ isLoggedIn }) => {
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
+  const [selectedQuestion, setSelectedQuestion] = useState(null);
+
+  const questions = [
+    { id: 1, text: 'Having trouble buying data?', response: 'Ensure your network selection is correct and try again.' },
+    { id: 2, text: 'Having trouble buying electricity?', response: 'You must be logged in. Check your meter number and try again.' },
+    { id: 3, text: 'Why isn’t the betting working?', response: 'Betting features are coming soon!' },
+  ];
+
+  const handleQuestionClick = (question) => setSelectedQuestion(question);
+
   return (
     <div className="bg-black min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-4 py-6">
-        {/* Heading */}
         <h1 className="text-center text-4xl sm:text-6xl md:text-7xl font-bold mt-16 sm:mt-20 md:mt-24 animate-fade-in">
           FAST RECHARGE
         </h1>
-
-        {/* Buttons with Icons */}
         <div className="flex flex-wrap justify-center gap-4 mt-12">
           <Link
             to="/input"
@@ -31,22 +40,20 @@ const HomePage = () => {
             Data Subscription
           </Link>
           <Link
-            to="/coming-soon"
+            to="/electricity"
             className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold h-12 px-6 rounded-lg flex items-center justify-center w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
           >
             <FaBolt className="mr-2" aria-hidden="true" />
             Electricity
           </Link>
           <Link
-            to="/coming-soon"
+            to="/comingsoon"
             className="bg-gradient-to-r from-blue-600 to-blue-800 hover:from-blue-700 hover:to-blue-900 text-white font-semibold h-12 px-6 rounded-lg flex items-center justify-center w-full sm:w-auto shadow-lg hover:shadow-xl transition-all duration-300 ease-in-out transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900"
           >
             <FaDice className="mr-2" aria-hidden="true" />
             Betting
           </Link>
         </div>
-
-        {/* Phone and Signal Icon */}
         <div className="relative mt-16 flex justify-center">
           <img src={phoneImage} alt="Phone" className="w-64 sm:w-72 md:w-80" />
           <FaSignal
@@ -54,6 +61,52 @@ const HomePage = () => {
             aria-hidden="true"
           />
         </div>
+        <div className="fixed bottom-4 right-4">
+          <button
+            onClick={() => setIsChatbotOpen(true)}
+            className="bg-blue-600 text-white p-3 rounded-full shadow-lg hover:bg-blue-700 transition-colors duration-200"
+          >
+            <FaRobot size={24} />
+          </button>
+        </div>
+        <Modal
+          isOpen={isChatbotOpen}
+          onRequestClose={() => setIsChatbotOpen(false)}
+          className="bg-gray-800 p-6 rounded-lg max-w-md mx-auto mt-20 text-white"
+          overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+        >
+          <h2 className="text-2xl font-bold mb-4">AI Chatbot</h2>
+          {selectedQuestion ? (
+            <div>
+              <p className="mb-4">{selectedQuestion.response}</p>
+              <button
+                onClick={() => setSelectedQuestion(null)}
+                className="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700"
+              >
+                Back to Questions
+              </button>
+            </div>
+          ) : (
+            <ul className="space-y-2">
+              {questions.map((q) => (
+                <li key={q.id}>
+                  <button
+                    onClick={() => handleQuestionClick(q)}
+                    className="text-left w-full p-2 hover:bg-gray-700 rounded"
+                  >
+                    {q.text}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <button
+            onClick={() => setIsChatbotOpen(false)}
+            className="mt-4 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700"
+          >
+            Close
+          </button>
+        </Modal>
       </div>
     </div>
   );

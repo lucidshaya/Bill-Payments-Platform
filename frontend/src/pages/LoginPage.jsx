@@ -32,8 +32,8 @@ const LoginPage = () => {
         progress: undefined,
       });
       setTimeout(() => {
-        navigate('/home');
-      }, 2000); // Delay navigation to show toast
+        navigate('/');
+      }, 1000); // Delay navigation to show toast
     } catch (error) {
       console.error('Login failed:', error);
       toast.error('Login failed. Please check your credentials.');

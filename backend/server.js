@@ -8,10 +8,9 @@ import authRoutes from './route/authRoutes.js';
 import airtimeRoutes from './route/airtimeRoutes.js';
 
 const app = express();
+app.use(cors());
 
-// app.use(cors());
-const cors = require('cors');
-app.use(cors({ origin: ['https://your-frontend.onrender.com', 'http://localhost:5173'] }));
+// app.use(cors({ origin: ['https://your-frontend.onrender.com', 'http://localhost:5173'] }));
 app.use(express.json());
 // app.get('https://bill-payments-platform5.onrender.com/api/health')
 app.use('/api/auth', authRoutes);

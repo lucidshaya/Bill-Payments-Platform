@@ -1,40 +1,53 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import LoginPage from './pages/LoginPage';
 import SignupPage from './pages/SignupPage';
 import HomePage from './pages/HomePage';
 import InputPage from './pages/InputPage';
-import PaymentSuccess from './pages/PaymentSucess';
+// import ElectricityPage from './pages/ElectricityPage'; // New page
+import ElectricityPage from './pages/ElectricityPage';
+import PaymentSuccess from './pages/PaymentSucess'; // Fixed typo
 import PaymentFailed from './pages/PaymentFailed';
 import Navbar from './components/Navbar';
-import Comingsoon from './pages/comingsoon';
+import ComingSoon from './pages/ComingSoon'; // Fixed casing
 import Footer from './components/Footer';
 import axios from 'axios';
-const api = axios.create({ baseURL: 'https://bill-payment-backend.onrender.com' });
+import cors from 'cors';
+
+// const api = axios.create({ baseURL: process.env.REACT_APP_API_URL });
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
+  useEffect(() => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      setIsLoggedIn(true);
+    }
+  }, []);
+
   const handleLogin = () => setIsLoggedIn(true);
-  const handleLogout = () => setIsLoggedIn(false);
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setIsLoggedIn(false);
+  };
 
   return (
     <Router>
       <Navbar isLoggedIn={isLoggedIn} onLogout={handleLogout} />
       <hr />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage isLoggedIn={isLoggedIn} />} />
         <Route path="/signup" element={<SignupPage onSignup={handleLogin} />} />
         <Route path="/login" element={<LoginPage onLogin={handleLogin} />} />
+        <Route path="/input" element={<InputPage isLoggedIn={isLoggedIn} />} />
         <Route
-          path="/input"
-          element={
-            isLoggedIn ? <InputPage /> : <Navigate to="/login" replace />
-          }
+          path="/electricity"
+          element={isLoggedIn ? <ElectricityPage />: <Navigate to="/login" replace />}
         />
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failed" element={<PaymentFailed />} />
-        <Route path="/comingsoon" element={<Comingsoon />} />
+        <Route path="/comingsoon" element={<ComingSoon />} />
       </Routes>
       <hr />
       <Footer />
