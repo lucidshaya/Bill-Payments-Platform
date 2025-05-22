@@ -8,7 +8,6 @@ import ElectricityPage from './pages/ElectricityPage';
 import PaymentSuccess from './pages/PaymentSucess'; // Fixed typo
 import PaymentFailed from './pages/PaymentFailed';
 import Navbar from './components/Navbar';
-import ComingSoon from './pages/ComingSoon'; // Fixed casing
 import Footer from './components/Footer';
 
 // const api = axios.create({ baseURL: process.env.REACT_APP_API_URL });
@@ -74,7 +73,7 @@ function App() {
 
         <Route path="/payment-success" element={<PaymentSuccess />} />
         <Route path="/payment-failed" element={<PaymentFailed />} />
-        <Route path="/comingsoon" element={<ComingSoon />} />
+
       </Routes>
       <hr />
       <Footer />
