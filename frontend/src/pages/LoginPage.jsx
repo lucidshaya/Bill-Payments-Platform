@@ -13,15 +13,26 @@ const LoginPage = () => {
   const [otp, setOtp] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const navigate = useNavigate();
+ /* 
+ State Management
+
+The component uses several state variables:
+
+    email and password: Store login form inputs.
+    isResetting: Toggles between login and password reset modes (false for login, true for reset).
+    resetStep: Tracks the password reset stage (enter_email, enter_otp, or success).
+    resetEmail, otp, and newPassword: Store inputs for the password reset process.
+ */
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await axios.post('http://localhost:5000/api/auth/login', {
         email,
-        password,
-      });
-      localStorage.setItem('token', response.data.token);
+        password, // Sends a POST request to http://localhost:5000/api/auth/login with email and password.
+      }); 
+      localStorage.setItem('token', response.data.token); // On success: Stores the token in localStorage, shows a "Welcome back!" toast, and navigates to / after a 1-second delay.
       toast.success('Welcome back!', {
         position: "top-right",
         autoClose: 2000,
@@ -39,8 +50,21 @@ const LoginPage = () => {
       toast.error('Login failed. Please check your credentials.');
     }
   };
+    /* 
+    UI Structure
 
-  const handleSendOtp = async (e) => {
+The UI adapts based on isResetting and resetStep:
+
+    Login Mode (isResetting === false):
+        Displays a form with email and password fields.
+        Includes a "Login" button, a "Sign up" link, and a "Forgot Password?" link to toggle isResetting.
+    Password Reset Mode (isResetting === true):
+        Step 1 (enter_email): Form to enter resetEmail and a "Send OTP" button.
+        Step 2 (enter_otp): Form to enter otp and newPassword with a "Reset Password" button.
+        Step 3 (success): Success message and a "Go to Login" button to return to login mode.
+    */
+   
+  const handleSendOtp = async (e) => { // Initiates password reset by sending a POST request to http://localhost:5000/api/auth/
     e.preventDefault();
     try {
       await axios.post('http://localhost:5000/api/auth/forgot-password', { email: resetEmail });

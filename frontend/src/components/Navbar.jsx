@@ -1,12 +1,18 @@
 import { useState } from 'react';
 
 const Navbar = ({ isLoggedIn, onLogout }) => {
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false); // Manages the mobile menu's open/closed state.
   const toggleMobileMenu = () => setIsMobileMenuOpen(!isMobileMenuOpen);
 
   return (
     <>
+    {/* Potential Improvements
+
+    Accessibility: Add ARIA attributes (e.g., aria-label="Toggle menu" on the hamburger button).
+    Enhanced UX: Allow closing the mobile menu by clicking outside or pressing Esc.
+    Active State: Style the current page's link differently.
+    Animation: Ensure animate-slide-down is defined in the CSS.
+     */}
       <header className="w-full bg-gradient-to-r from-sky-500 to-sky-700 text-white text-center py-2 animate-pulse">
         🚀 Exciting Features Coming Soon! | Need Help? Contact us: +234 432 234 34232
       </header>
@@ -18,6 +24,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
           >
             Quick Recharge
           </a>
+          
           <button
             className="md:hidden text-white focus:outline-none"
             onClick={toggleMobileMenu}
@@ -46,6 +53,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
             </ul>
           </div>
           <div className="hidden md:flex items-center space-x-4">
+            {/* Conditionally renders based on isLoggedIn */}
             {!isLoggedIn ? (
               <>
                 <a
@@ -70,6 +78,7 @@ const Navbar = ({ isLoggedIn, onLogout }) => {
               </button>
             )}
           </div>
+          {/* Appears only when isMobileMenuOpen is true. */}
           {isMobileMenuOpen && (
             <div className="md:hidden absolute top-16 right-6 w-48 bg-black border border-gray-800 rounded-lg shadow-lg z-10 animate-slide-down">
               <ul className="flex flex-col gap-y-4 p-4">

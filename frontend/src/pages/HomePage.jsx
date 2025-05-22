@@ -1,23 +1,25 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { FaPhone, FaInternetExplorer, FaBolt, FaDice, FaSignal, FaRobot } from 'react-icons/fa';
-import Modal from 'react-modal';
+import { Link } from 'react-router-dom'; // navigate between pages 
+import { FaPhone, FaInternetExplorer, FaBolt, FaDice, FaSignal, FaRobot } from 'react-icons/fa'; 
+import Modal from 'react-modal'; // for the chatbot popup 
 import phoneImage from '../assets/phone.png'; // Adjust path as needed
 
 Modal.setAppElement('#root'); // For accessibility
 
 const HomePage = ({ isLoggedIn }) => {
-  const [isChatbotOpen, setIsChatbotOpen] = useState(false);
-  const [selectedQuestion, setSelectedQuestion] = useState(null);
-
+  const [isChatbotOpen, setIsChatbotOpen] = useState(false); // isChatbotOpen: A boolean that controls whether the chatbot modal is visible. Initially false.
+  const [selectedQuestion, setSelectedQuestion] = useState(null); // selectedQuestion: Stores the currently selected question from the chatbot’s question list. Initially null.
+  
+  // Q & A
   const questions = [
     { id: 1, text: 'Having trouble buying data?', response: 'Ensure your network selection is correct and try again.' },
     { id: 2, text: 'Having trouble buying electricity?', response: 'You must be logged in. Check your meter number and try again.' },
     { id: 3, text: 'Why isn’t the betting working?', response: 'Betting features are coming soon!' },
   ];
+  
+  const handleQuestionClick = (question) => setSelectedQuestion(question); // A helper function, handleQuestionClick, updates selectedQuestion when a question is clicked.
 
-  const handleQuestionClick = (question) => setSelectedQuestion(question);
-
+  
   return (
     <div className="bg-black min-h-screen text-white">
       <div className="max-w-7xl mx-auto px-4 py-6">

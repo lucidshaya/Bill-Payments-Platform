@@ -6,6 +6,7 @@ import cors from 'cors';
 import pool from './config/database.js';
 import authRoutes from './route/authRoutes.js';
 import airtimeRoutes from './route/airtimeRoutes.js';
+import paymentRoutes from './route/paymentsRoute.js';
 
 const app = express();
 app.use(cors());
@@ -15,6 +16,9 @@ app.use(express.json());
 // app.get('https://bill-payments-platform5.onrender.com/api/health')
 app.use('/api/auth', authRoutes);
 app.use('/api/airtime', airtimeRoutes);
+app.use('/api/auth', authRoutes);
+app.use('/api', paymentRoutes);
+
 
 console.log('JWT_SECRET:', process.env.JWT_SECRET); // Debug
 

@@ -1,5 +1,6 @@
 import Paystack from 'paystack-api';
-import Transaction from '../model/Transaction.js';
+import Transaction from '../models/Transaction.js';
+import express from 'express';
 
 const paystack = Paystack(process.env.PAYSTACK_SECRET_KEY);
 
@@ -35,7 +36,8 @@ const paystack = Paystack(process.env.PAYSTACK_SECRET_KEY);
 
 
 // routes/electricity.js
-const express = require('express');
+
+
 const router = express.Router();
 const auth = require('../middleware/auth'); // Your auth middleware
 const { initiatePayment } = require('../services/payment'); // Paystack integration

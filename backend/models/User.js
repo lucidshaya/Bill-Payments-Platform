@@ -13,6 +13,13 @@ class User {
     const { rows } = await pool.query(query, [email]);
     return rows[0];
   }
+
+  static async updatePassword(email, newPassword) {
+    const query = 'UPDATE users SET password = $1 WHERE email = $2 RETURNING *';
+    const values = [newPassword, email];
+    const { rows } = await pool.query(query, values);
+    return rows[0];
+  }
 }
 
 export default User;

@@ -2,10 +2,9 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import nodemailer from 'nodemailer';
 import crypto from 'crypto';
-import User from '../model/User.js';
-import express from 'express';
+import User from '../models/User.js'; // Adjust path as necessary
 
-const router = express.Router();
+const otpStore = {};
 
 export const signup = async (req, res) => {
   try {
@@ -32,9 +31,6 @@ export const login = async (req, res) => {
     res.status(500).json({ message: 'Login failed', error: error.message });
   }
 };
-
-
-const otpStore = {};
 
 export const forgotPassword = async (req, res) => {
   const { email } = req.body;
@@ -70,8 +66,7 @@ export const forgotPassword = async (req, res) => {
   }
 };
 
-// Reset Password - Verify OTP and Update Password
-router.post('/reset-password', async (req, res) => {
+export const resetPassword = async (req, res) => {
   const { email, otp, newPassword } = req.body;
   if (!email || !otp || !newPassword) {
     return res.status(400).json({ message: 'All fields are required' });
@@ -88,6 +83,4 @@ router.post('/reset-password', async (req, res) => {
     console.error('Failed to reset password:', error);
     res.status(500).json({ message: 'Failed to reset password' });
   }
-});
-
-export default router;
+};

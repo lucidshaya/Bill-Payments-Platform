@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const SignupPage = () => {
+const SignupPage = () => { // username, email, and password: Store signup form inputs.
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -14,10 +14,10 @@ const SignupPage = () => {
         email,
         password,
       });
-      localStorage.setItem('token', response.data.token);
+      localStorage.setItem('token', response.data.token); // On success: Stores the token in localStorage and redirects to /home using
       window.location.href = '/home';
     } catch (error) {
-      console.error('Signup failed:', error);
+      console.error('Signup failed:', error);  // On failure: Logs the error to the console (no user feedback).
     }
   };
 

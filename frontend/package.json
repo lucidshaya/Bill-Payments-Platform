@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "axios": "^1.9.0",
+    "install": "^0.13.0",
+    "npm": "^11.4.0",
     "react": "^19.1.0",
     "react-chatbot-kit": "^2.2.2",
     "react-dom": "^19.1.0",

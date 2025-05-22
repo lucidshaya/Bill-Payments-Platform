@@ -1,5 +1,5 @@
 import Paystack from 'paystack-api';
-import Transaction from '../model/Transaction.js';
+import Transaction from '../models/Transaction.js';
 
 const paystack = Paystack(process.env.PAYSTACK_SECRET_KEY);
 
